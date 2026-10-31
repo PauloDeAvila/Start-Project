@@ -1,30 +1,37 @@
-# Project brief — fill in for each new project
+# Project brief — complete for each new project
 
-## Purpose
-Describe what this software does and why it exists.
+## Purpose and supported functionality
+Document what the project does and the actual user journeys.
 
 ## In scope
-- Define supported workflows and features.
+- Supported capabilities and behaviors.
 
 ## Explicitly out of scope
-- List excluded features, premature optimizations, and boundaries.
+- Excluded features, refactors and architectural changes.
 
-## Stack and runtime
-- Languages, frameworks, versions, deployment targets.
+## Stack and environments
+- Languages, frameworks, versions, operating systems, environments and external prerequisites.
 
-## Architectural invariants
-- Contracts, dependency direction, compatibility requirements, persistence and security constraints.
+## Architecture and critical invariants
+- API/data contracts, dependency direction, compatibility, state and security constraints.
 
 ## Acceptance criteria
-- User-observable behaviors and objective checks that prove work is complete.
+- Observable, testable expectations and failure behaviors.
 
-## Verification commands
-- Format:
-- Lint:
-- Typecheck:
-- Unit tests:
-- Integration tests:
-- Build:
+## Mandatory verification matrix
+Record actual commands and test coverage for every applicable tier. The agent must run all tiers AND the full existing repository suite after each implementation, not just tests for modified files.
+
+| Layer | Commands / suite | Dependencies / prerequisites | Evidence expected |
+| --- | --- | --- | --- |
+| Basic functions / unit tests | TBD | TBD | Pass/fail and counts |
+| Component and subsystem | TBD | TBD | Pass/fail and counts |
+| Integration and contracts | TBD | TBD | Pass/fail and counts |
+| Full user-flow / E2E | TBD | TBD | Pass/fail and counts |
+| Full repository regression | TBD | TBD | All existing tests run |
+| Build, lint, types, other applicable checks | TBD | TBD | Actual exit status |
+
+## Verification policy
+An implementation is NOT VERIFIED until the complete applicable matrix passes and objective results are recorded. Missing test infrastructure requires creation or explicit BLOCKED status; do not claim completion when verification cannot run. Do not assert absolute 100% correctness.
 
 ## Known risks and unresolved questions
-- Unknowns should remain explicit until verified.
+- Keep unknowns explicit until confirmed.
