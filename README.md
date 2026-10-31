@@ -29,3 +29,10 @@ Read before editing; separate observed facts from guesses; change the smallest c
 ## Usage note
 
 Skills are instructions, not executable tooling. MCP connections, compilers, test runners, external accounts and credentials are deliberately not installed or embedded here. Configure them per project and per machine.
+
+## Strict delivery governance
+- `PONTO.md` defines evidence-driven read-only review and dependency/variable impact tracing.
+- `.agents/skills/ci-bootstrap/` configures real tests, CI and branch protection **before features**.
+- `.agents/skills/independent-review/` requires a detailed independent review report.
+- `.github/workflows/ci.yml` is intentionally red until the new project defines and runs real stack-specific checks; passing only a governance-file check is insufficient.
+- GitHub branch protection/rulesets are server-side repository settings and must be configured and verified separately for each cloned/template repository.
