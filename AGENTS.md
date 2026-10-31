@@ -37,3 +37,8 @@ Otherwise report **BLOCKED / NOT VERIFIED** and supply results and next steps; n
 
 ## Context and skills
 Read PROJECT.md, docs/context-map.md, docs/architecture.md, docs/decisions.md. Source is authoritative when documents are stale. Apply .agents/skills/regression-first to implementation tasks and the other relevant skills for scope and impact.
+
+## Mandatory CI/bootstrap and independent review
+Before feature implementation in each new project, run .agents/skills/ci-bootstrap. Set up a real CI pipeline for its actual stack, then confirm GitHub branch protection/rulesets require PRs and passing checks. The starter CI intentionally fails until real tests are configured: never replace it with a success-only placeholder. If CI or protection cannot be verified, report BLOCKED and do not label the project ready.
+
+For every code change, run .agents/skills/independent-review after implementation. The reviewer MUST follow PONTO.md, trace changed symbols to direct and transitive consumers, inspect tests and the complete diff, and generate the detailed report in docs/review-report-template.md. A separate read-only subagent is preferred if the runtime supports it; otherwise run a clearly separated review phase. Review cannot approve without required test evidence.
