@@ -35,3 +35,13 @@ An implementation is NOT VERIFIED until the complete applicable matrix passes an
 
 ## Known risks and unresolved questions
 - Keep unknowns explicit until confirmed.
+
+## Bootstrap gate (mandatory before feature work)
+- [ ] Stack-specific dependencies and real test commands established
+- [ ] CI runs actual automated checks across all applicable levels
+- [ ] Missing automated coverage identified and addressed or explicitly blocked
+- [ ] GitHub PR/branch protection configured and independently confirmed
+- [ ] Required CI checks enforced (not merely present as optional actions)
+- [ ] Independent review process configured using PONTO.md
+
+Note: The starter workflow deliberately fails pending project-specific test configuration. This is NOT a runnable product test suite.
