@@ -1,0 +1,28 @@
+name: Validation Gate
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  policy-bootstrap:
+    name: Policy Bootstrap Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate required governance files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in AGENTS.md PROJECT.md PONTO.md docs/architecture.md docs/context-map.md docs/review-report-template.md; do
+            test -s "$file" || { echo "::error::Missing or empty $file"; exit 1; }
+          done
+      - name: Enforce project-specific test workflow before feature delivery
+        shell: bash
+        run: |
+          echo "::error::Starter bootstrap only. Add a project-specific workflow running real unit, component, integration, E2E, regression and build checks, as applicable, then replace this blocker."
+          exit 1
