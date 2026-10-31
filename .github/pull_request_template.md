@@ -1,17 +1,31 @@
-## Objective and scope
-What requested behavior does this change deliver? What is intentionally out of scope?
+## Objective and limits
+- Requested behavior and acceptance criteria:
+- Explicitly out of scope:
 
 ## Impact analysis
-- Affected components and downstream consumers:
-- Contracts/invariants preserved:
-- Compatibility or migration risks:
+- Changed components and dependent consumers:
+- Interfaces, data contracts and invariants preserved:
+- Risks and regression-sensitive workflows:
 
-## Verification
-- [ ] Relevant regression tests added/updated or why unnecessary
-- [ ] Focused tests executed (include commands/results)
-- [ ] Affected integration paths checked
-- [ ] Changes reviewed for unrelated edits and unnecessary abstractions
-- [ ] Documentation updated only if needed
+## Progressive verification matrix
+| Layer | Command / scenario | Actual result | Evidence / blocker |
+| --- | --- | --- | --- |
+| Unit / basic functions | | | |
+| Component / subsystem | | | |
+| Contract / integration | | | |
+| End-to-end workflows | | | |
+| **Full repository regression suite** | | | |
+| Build / lint / typecheck / applicable nonfunctional | | | |
 
-## Notes
-Remaining risks, unknowns, and checks not run.
+## Delivery gate
+- [ ] Tests for new behavior, boundary cases and regressions are included
+- [ ] All existing repository tests executed and passed (or task marked blocked)
+- [ ] Affected critical workflows validated
+- [ ] Failures, skips and unavailable tests explicitly documented
+- [ ] Diff inspected for unrelated edits, contract breaks and unnecessary abstractions
+- [ ] Documentation updated where the architecture/behavior genuinely changed
+- [ ] Evidence collected for each required layer
+
+**Status:** VERIFIED FOR DELIVERY / BLOCKED — NOT VERIFIED
+
+Passing tests does not prove zero bugs. Never state “100% working” without qualification.
