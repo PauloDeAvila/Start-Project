@@ -1,31 +1,39 @@
 # Engineering contract for AI agents
 
-Read this file before any task. This project's source of truth is PROJECT.md and its existing implementation, not your assumptions.
+Read this file before every task. PROJECT.md and verified source code define the scope; instructions never replace evidence.
 
 ## Non-negotiable rules
-1. **Respect scope.** Restate the task's goal, affected components, constraints, and acceptance criteria. Do not add unrelated features, refactors, dependencies, or cleanup.
-2. **Inspect before editing.** Locate entry points, callers, contracts, dependencies, tests, and error paths. Read the existing implementation instead of guessing.
-3. **Avoid speculative abstraction.** Prefer the simplest cohesive solution that fits existing patterns. Do not introduce generic layers, factories, base classes, wrappers, or new architecture without a concrete need and demonstrated benefit.
-4. **Protect invariants.** Preserve existing behavior, public APIs, file formats, data contracts, and backwards compatibility unless the task explicitly authorizes changes.
-5. **Assess blast radius.** For every change, list what can break, who calls it, and what tests must protect it. Never fix component A by silently breaking component B.
-6. **Make narrow edits.** Modify the fewest appropriate modules. Separate behavior changes from refactors. Avoid sweeping rewrites and unrelated formatting diffs.
-7. **Test the change.** Add/update focused tests plus regression tests for affected paths. Run available formatters, type checks, tests and build steps relevant to the change. Never claim checks passed if they were not run.
-8. **Do not hide failures.** No broad exception swallowing, hardcoded success, disabling tests, weakening assertions, or removing functionality merely to pass validation.
-9. **Maintain documentation.** Update context map and architectural decisions only when actual contracts or structure changed; avoid documentation churn.
-10. **Escalate risk.** Ask before destructive commands, migrations, security-sensitive changes, changes with unclear compatibility, or large architectural decisions.
+1. **Stay in scope.** Determine the requested outcome, affected modules, exclusions and acceptance criteria. Do not expand scope, refactor unrelated components or add speculative features.
+2. **Inspect before editing.** Read entry points, callers, tests, interfaces, error paths and architectural boundaries. Do not assume behavior.
+3. **Avoid unnecessary abstraction.** Prefer cohesive, minimal changes using existing patterns. New layers, wrappers, interfaces and dependencies require demonstrated value.
+4. **Protect contracts and invariants.** Preserve unrelated behavior, public APIs, data formats and compatibility unless explicitly approved.
+5. **Map change impact.** Trace dependencies and consumers; identify what might regress before changing code.
+6. **Edit narrowly.** Make minimal, reviewable changes and keep unrelated formatting out of the diff.
+7. **Mandatory exhaustive verification gate.** No implementation is COMPLETE or READY TO DELIVER until the applicable verification suite has actually been run and passed. Revalidate the whole project progressively: basic functions and unit tests → modules and component tests → integration and contracts → end-to-end user flows → complete regression suite → build/static/security checks as applicable. Always run the entire existing test suite for the repository, not only the modified module. Expand tests to cover changed behavior, regressions, boundaries, error paths and critical invariants. Use the regression-first skill.
+8. **Evidence over confidence.** Record exact commands, exit codes, tests executed/skipped/failed, environment and artifacts when available. An assertion of “100% working” is forbidden: passing tests establishes evidence under tested conditions, not universal correctness. Never invent results or silently substitute a small smoke test for a comprehensive suite.
+9. **Failed or blocked verification prevents completion.** Diagnose failures, fix only related root causes, and rerun impacted tests AND the full suite. If tooling, hardware, credentials, external services or time make a test impossible, mark the task BLOCKED / NOT VERIFIED, explain what is missing, and do not claim delivery completed. Do not spin indefinitely or conceal limitations.
+10. **Never weaken checks.** Do not delete/skip tests, loosen assertions, mock the target behavior to fake success, swallow exceptions, or change baselines merely to pass.
+11. **Update only factual documentation.** Keep context maps, architecture decisions and test procedures aligned with observed source.
+12. **Escalate meaningful risk.** Seek approval before destructive operations, migrations, security-sensitive changes or major architectural changes.
 
-## Working sequence
-**Understand → Map impact → Plan → Edit minimally → Test → Review diff → Report.**
-For small, isolated changes, keep the plan brief. For high-risk changes, request approval before execution.
+## Workflow
+**Understand → Trace dependencies → Define acceptance & test matrix → Plan → Minimal edit → Tests from low to high level → Full regression → Inspect diff → Evidence report.**
 
-## Required delivery report
-- Scope delivered and files changed.
-- Behavioral impact, assumptions and contracts preserved.
-- Checks run with actual results; name checks not run and why.
-- Remaining risks and recommended follow-ups (without executing extras).
+## Completion gate
+A task can be reported as **VERIFIED FOR DELIVERY** only if:
+- Acceptance criteria have objective checks with passing evidence.
+- The full applicable existing automated test suite passes, with no unexplained skips or regressions.
+- All affected critical paths are exercised, including expected failure and edge-case behavior.
+- Required build, lint, static checks and applicable environment/integration checks pass.
+- Results are reported honestly with coverage limitations. No test methodology proves absolute absence of bugs.
 
-## Project context
-Read PROJECT.md first. Consult docs/context-map.md for component ownership, docs/architecture.md for boundaries, and docs/decisions.md for accepted tradeoffs. If they are incomplete, mark unknowns; never invent facts.
+Otherwise report **BLOCKED / NOT VERIFIED** and supply results and next steps; never say the work is finished or fully operational.
 
-## Skills
-Use the appropriate workflow under .agents/skills when the task requires it. Skills guide behavior; they do not override this contract.
+## Required final report
+- Changed files and requested outcomes.
+- Dependency and compatibility impact.
+- Test matrix by layer; commands and actual outcomes; skipped/blocked checks.
+- Risks, unverified scenarios and evidence links/logs if available.
+
+## Context and skills
+Read PROJECT.md, docs/context-map.md, docs/architecture.md, docs/decisions.md. Source is authoritative when documents are stale. Apply .agents/skills/regression-first to implementation tasks and the other relevant skills for scope and impact.
