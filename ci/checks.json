@@ -1,0 +1,11 @@
+{
+  "description": "MANDATORY: configure real commands for the target project's stack. This starter is intentionally blocked.",
+  "checks": {
+    "unit": {"status": "required", "command": ["python", "-m", "unittest", "discover", "-s", "tests"]},
+    "component": {"status": "unconfigured"},
+    "integration": {"status": "unconfigured"},
+    "e2e": {"status": "unconfigured"},
+    "regression": {"status": "unconfigured"},
+    "build": {"status": "unconfigured"}
+  }
+}
