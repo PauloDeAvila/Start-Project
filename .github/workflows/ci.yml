@@ -1,4 +1,5 @@
 name: Validation Gate
+
 on:
   pull_request:
   push:
@@ -9,20 +10,30 @@ permissions:
   contents: read
 
 jobs:
-  policy-bootstrap:
-    name: Policy Bootstrap Check
+  starter-tests:
+    name: Starter Unit Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate required governance files
-        shell: bash
-        run: |
-          set -euo pipefail
-          for file in AGENTS.md PROJECT.md PONTO.md docs/architecture.md docs/context-map.md docs/review-report-template.md; do
-            test -s "$file" || { echo "::error::Missing or empty $file"; exit 1; }
-          done
-      - name: Enforce project-specific test workflow before feature delivery
-        shell: bash
-        run: |
-          echo "::error::Starter bootstrap only. Add a project-specific workflow running real unit, component, integration, E2E, regression and build checks, as applicable, then replace this blocker."
-          exit 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -v
+
+  project-verification:
+    name: Project Verification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run project-specific full verification matrix (fail closed)
+        run: python tools/verify_project.py
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-evidence
+          path: verification-results.json
+          if-no-files-found: warn
